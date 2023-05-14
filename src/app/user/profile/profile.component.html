@@ -8,12 +8,12 @@
     <div style="padding-top: 2rem" class="row">
         <div class="col">
             <img class="profile-image"
-                [src]="previewImgURL || formatImage(userProfileImg) || 'https://www.missingdogsuk.co.uk/wp-content/plugins/wp-job-manager-resumes/assets/images/candidate.png'"
+                [src]="previewImgURL || formatImage(userProfileImg) || 'https://cdn.pixabay.com/photo/2018/11/13/22/01/avatar-3814081_960_720.png'"
                 alt="user image">
 
             <input type="file" style="display: none" #fileInput (change)="onFileSelected($event)">
 
-            <button mat-button (click)="fileInput.click()">Pick File</button>
+            <button mat-raised-button color="accent" (click)="fileInput.click()">Upload File</button>
             <button mat-button *ngIf="selectedFile" (click)="onUpload()">Upload</button>
         </div>
 

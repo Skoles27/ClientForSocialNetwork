@@ -1,25 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { switchAll, switchMap } from 'rxjs';
+import { Post } from 'src/app/models/Post';
 import { User } from 'src/app/models/User';
+import { CommentService } from 'src/app/service/comment.service';
 import { ImageUploadService } from 'src/app/service/image-upload.service';
 import { NotificationService } from 'src/app/service/notification.service';
 import { PostService } from 'src/app/service/post.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { UserService } from 'src/app/service/user.service';
-import { EditUserComponent } from '../edit-user/edit-user.component';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-show-user',
+  templateUrl: './show-user.component.html',
+  styleUrls: ['./show-user.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ShowUserComponent implements OnInit {
 
   isUserDataLoaded = false;
   user!: User;
   selectedFile!: File;
   userProfileImg!: File;
   previewImgURL: any;
+  posts!: Post[];
+  isUserPostsLoaded = false;
 
   constructor(
     private tokenService: TokenStorageService,
@@ -27,18 +32,31 @@ export class ProfileComponent implements OnInit {
     private dialog: MatDialog,
     private notificationService: NotificationService,
     private imgService: ImageUploadService,
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+    private commentService: CommentService,
+    private route : ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.userService.getCurrentUser()
+    let userId = this.route.snapshot.paramMap.get("id");
+    console.log(userId);
+    
+    this.userService.getUserById(userId!.toString())
       .subscribe(data => {
         this.user = data;
         this.isUserDataLoaded = true;
       });
 
-    this.imgService.getImageForUser()
+      this.postService.getAllPostsForUser()
       .subscribe(data => {
+        console.log(data);
+        this.posts = data;
+        this.getImagesForPosts(this.posts);
+        this.getCommentsForPosts(this.posts);
+        this.isUserPostsLoaded = true;
+      });
+
+    this.imgService.getImageForOtherUser(userId!.toString())
+      .subscribe((data: { imageBytes: File; }) => {
         this.userProfileImg = data.imageBytes;
       });
   }
@@ -46,9 +64,6 @@ export class ProfileComponent implements OnInit {
   onFileSelected(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.selectedFile = (target.files as FileList)[0];
-
-    // this.selectedFile = event.target.files[0];
-
     const reader = new FileReader();
     reader.readAsDataURL(this.selectedFile);
     reader.onload = () => {
@@ -56,24 +71,21 @@ export class ProfileComponent implements OnInit {
     };
   }
 
-  openEditDialog(): void {
-    const dialogUserEditConfig = new MatDialogConfig();
-    dialogUserEditConfig.width = '600px';
-    dialogUserEditConfig.height= '500px';
-    dialogUserEditConfig.scrollStrategy?.disable;
-    dialogUserEditConfig.data = {
-      user: this.user
-    }
-    this.dialog.open(EditUserComponent, dialogUserEditConfig);
+  getImagesForPosts(posts: Post[]): void {
+    posts.forEach(p => {
+      this.imgService.getImageForPost(p.id!)
+        .subscribe((data: { imageBytes: File }) => {
+          p.image = data.imageBytes;
+        })
+    });
   }
 
-  onUpload(): void {
-    if (this.selectedFile != null) {
-      this.imgService.uploadImageForUser(this.selectedFile)
-        .subscribe(() => {
-          this.notificationService.showSnackBar('Profile Image updated successfully');
-        });
-    }
+  getCommentsForPosts(posts: Post[]): void {
+    posts.forEach(p => {
+      this.commentService.getAllCommentsToPost(p.id!)
+        .subscribe(data =>
+          p.comments = data)
+    });
   }
 
   formatImage(img: any): any {
@@ -82,4 +94,7 @@ export class ProfileComponent implements OnInit {
     }
     return 'data:image/jpeg;base64,' + img;
   }
+
 }
+
+ 

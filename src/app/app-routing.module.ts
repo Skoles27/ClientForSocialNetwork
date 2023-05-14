@@ -7,12 +7,14 @@ import { AuthGuardService } from './helper/auth-guard.service';
 import { ProfileComponent } from './user/profile/profile.component';
 import { UserPostsComponent } from './user/user-posts/user-posts.component';
 import { AddPostComponent } from './user/add-post/add-post.component';
+import { ShowUserComponent } from './user/show-user/show-user.component';
 
 
 const routes: Routes = [
   { path: 'signIn', component: SigninComponent },
   { path: 'signUp', component: SignupComponent },
   { path: 'main', component: IndexComponent, canActivate: [AuthGuardService] },
+  { path: 'showUser/:id', component: ShowUserComponent },
   {
     path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService], children: [
       { path: '', component: UserPostsComponent, canActivate: [AuthGuardService] },

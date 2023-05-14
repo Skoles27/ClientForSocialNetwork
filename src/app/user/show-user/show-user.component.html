@@ -1,0 +1,47 @@
+<div *ngIf="isUserDataLoaded" class="user-profile">
+
+    <h1>Profile</h1>
+    <div style="padding-top: 2rem" class="row">
+        <div class="col">
+            <img class="profile-image"
+                [src]="previewImgURL || formatImage(userProfileImg) || 'https://cdn.pixabay.com/photo/2018/11/13/22/01/avatar-3814081_960_720.png'"
+                alt="user image">
+
+            <input type="file" style="display: none" #fileInput (change)="onFileSelected($event)">
+        </div>
+
+        <div class="col" style="text-align: left">
+            <h2>{{user.username}}</h2>
+            <h3 style="font-style: italic">{{user.name}} {{user.lastname}}</h3>
+            <p>{{user.bio}}</p>
+        </div>
+
+        <mat-divider style="margin: 2rem 0"></mat-divider>
+        <router-outlet></router-outlet>
+
+        <div *ngIf="isUserPostsLoaded">
+            <h2>{{posts.length}} Posts</h2>
+
+            <mat-card class="post-card" *ngFor="let post of posts; let i = index">
+                <mat-card-header style="text-align: left">
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>{{post.title}}</mat-card-title>
+                  <mat-card-subtitle>{{post.location}}</mat-card-subtitle>
+                </mat-card-header>
+          
+                <img mat-card-image [src]="formatImage(post.image)" alt="post image">
+
+                <mat-card-content>
+                    <p>{{post.caption}}</p>
+                </mat-card-content>
+
+                <div style="text-align: left">
+                    <p *ngFor="let comment of post.comments; let c = index"><span style="font-weight: 500">{{comment.username}}</span>: {{comment.message}}</p>
+                </div>
+              
+                  <mat-card-subtitle align="start">Likes: {{post.likes}} <span *ngIf="post.likes! > 0">by {{post.usersLiked}}</span></mat-card-subtitle>
+            </mat-card>
+        </div>
+
+    </div>
+</div>

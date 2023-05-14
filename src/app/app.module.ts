@@ -17,6 +17,8 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { UserPostsComponent } from './user/user-posts/user-posts.component';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { AddPostComponent } from './user/add-post/add-post.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ShowUserComponent } from './user/show-user/show-user.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { AddPostComponent } from './user/add-post/add-post.component';
     ProfileComponent,
     UserPostsComponent,
     EditUserComponent,
-    AddPostComponent
+    AddPostComponent,
+    ShowUserComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { AddPostComponent } from './user/add-post/add-post.component';
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     authInterceptorProviders,

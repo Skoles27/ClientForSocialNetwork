@@ -2,6 +2,11 @@
     flex: 1 1 auto;
 }
 
+.username{
+    margin-top: 15px;
+    margin-right: 15px;
+}
+
 #menu-item button {
     display: block;
     margin: 0 auto;

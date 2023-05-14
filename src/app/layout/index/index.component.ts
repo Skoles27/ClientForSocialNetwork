@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Post } from 'src/app/models/Post';
 import { User } from 'src/app/models/User';
 import { CommentService } from 'src/app/service/comment.service';
@@ -23,7 +24,8 @@ export class IndexComponent implements OnInit {
     private userService: UserService,
     private commentService: CommentService,
     private notificationService: NotificationService,
-    private imageService: ImageUploadService) { }
+    private imageService: ImageUploadService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.postService.getAllPosts().subscribe(data => {
@@ -73,6 +75,7 @@ export class IndexComponent implements OnInit {
           const index = post.usersLiked?.indexOf(this.user.username, 0);
           if (index! > -1) {
             post.usersLiked?.splice(index!, 1);
+            this.notificationService.showSnackBar('Like removed!');
           }
         });
     }
@@ -94,4 +97,8 @@ export class IndexComponent implements OnInit {
     }
     return 'data:image/jpeg;base64,' + img;
   }
+
+  // showUser(userId : number){
+  //   this.router.navigate(['showUser', userId]);
+  // }
 }

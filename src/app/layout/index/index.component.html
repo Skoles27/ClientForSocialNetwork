@@ -5,15 +5,17 @@
         <mat-card-title>{{post.title}}</mat-card-title>
         <mat-card-subtitle>{{post.location}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image [src]="formatImage(post.image)" alt="post image">
-      <mat-card-subtitle  align="start">Posted by {{post.username}}</mat-card-subtitle>
+      <img mat-card-image [src]="formatImage(post.image) || 'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg'" alt="post image"> 
+      <mat-card-subtitle  align="start"> Posted by: <a [routerLink]="['/showUser', post.userId!]">{{post.username}}</a></mat-card-subtitle>
+      <!-- <mat-card-subtitle  align="start"> Posted by: <button (click)="showUser(post.userId!)">{{post.username}}</button></mat-card-subtitle> -->
+
       <mat-card-content>
         <p>{{post.caption}}</p>
       </mat-card-content>
   
       <mat-card-actions align="start">
-  
-        <button *ngIf="isUserDataLoaded" mat-button (click)="likePost(post.id!, i)" [ngClass]="post.usersLiked?.indexOf(user.username) !== -1 ? 'is-liked' : 'not-liked'">
+        <button *ngIf="isUserDataLoaded" mat-stroked-button [matBadge]="post.likes" matBadgeColor="warn" 
+          (click)="likePost(post.id!, i)" [ngClass]="post.usersLiked?.indexOf(user.username) !== -1 ? 'is-liked' : 'not-liked'">
           <mat-icon>favorite</mat-icon> Like</button>
       </mat-card-actions>
   
@@ -29,4 +31,3 @@
   
     </mat-card>
   </div>
-  

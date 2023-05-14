@@ -30,4 +30,8 @@ export class ImageUploadService {
   getImageForPost(postId: number): any {
     return this.http.get(IMG_API + postId + '/image');
   }
+
+  getImageForOtherUser(userId: string): any {
+    return this.http.get(IMG_API + userId + '/user/image');
+  }
 }

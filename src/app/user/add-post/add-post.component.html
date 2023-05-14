@@ -6,14 +6,14 @@
     <h2>Create Post</h2>
     <form [formGroup]="postForm">
   
-      <img class="post-image" [src]="previewImgURL || 'https://www.missingdogsuk.co.uk/wp-content/plugins/wp-job-manager-resumes/assets/images/candidate.png'" alt="user image">
+      <img class="post-image" [src]="previewImgURL || 'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg'" alt="user image">
   
       <input type="file"
              style="display: none"
              #fileInput
              (change)="onFileSelected($event)">
   
-      <button mat-button (click)="fileInput.click()">Pick File</button>
+      <button class="uplodBtn" mat-raised-button color="accent" (click)="fileInput.click()">Upload File</button>
   
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Title</mat-label>
