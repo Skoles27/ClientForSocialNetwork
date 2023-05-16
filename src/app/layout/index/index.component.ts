@@ -47,15 +47,18 @@ export class IndexComponent implements OnInit {
       this.imageService.getImageForPost(p.id!)
         .subscribe((data: { imageBytes: File }) => {
           p.image = data.imageBytes;
-        })
+        },
+          (error: { message: any; }) => {
+            console.log(error)
+          })
     });
   }
 
   getCommentsForPost(posts: Post[]): void {
     posts.forEach(p => {
       this.commentService.getAllCommentsToPost(p.id!)
-      .subscribe(data =>
-        p.comments = data)
+        .subscribe(data =>
+          p.comments = data);
     });
   }
 
@@ -66,6 +69,7 @@ export class IndexComponent implements OnInit {
     if (!post.usersLiked?.includes(this.user.username)) {
       this.postService.likePost(postId, this.user.username)
         .subscribe(() => {
+          post.likes! ++;
           post.usersLiked?.push(this.user.username);
           this.notificationService.showSnackBar('Liked!');
         });
@@ -74,6 +78,7 @@ export class IndexComponent implements OnInit {
         .subscribe(() => {
           const index = post.usersLiked?.indexOf(this.user.username, 0);
           if (index! > -1) {
+            post.likes! --;
             post.usersLiked?.splice(index!, 1);
             this.notificationService.showSnackBar('Like removed!');
           }

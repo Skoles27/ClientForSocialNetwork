@@ -1,0 +1,17 @@
+.scroll {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.formField {
+    padding: 0 30px 0 30px ;
+}
+
+h2 {
+    text-align: center;
+    padding: 15px 0 15px;
+}
+
+.btn {
+    padding: 10px 50px 10px 50px;
+}

@@ -31,7 +31,7 @@ import { ShowUserComponent } from './user/show-user/show-user.component';
     UserPostsComponent,
     EditUserComponent,
     AddPostComponent,
-    ShowUserComponent
+    ShowUserComponent,
   ],
   imports: [
     BrowserModule,

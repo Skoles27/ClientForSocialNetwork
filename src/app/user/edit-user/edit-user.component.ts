@@ -32,7 +32,7 @@ export class EditUserComponent implements OnInit {
         Validators.compose([Validators.required])
       ],
       lastName: [
-        this.data.user.lastName,
+        this.data.user.lastname,
         Validators.compose([Validators.required])
       ],
       bio: [

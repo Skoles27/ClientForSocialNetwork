@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { switchAll, switchMap } from 'rxjs';
 import { Post } from 'src/app/models/Post';
 import { User } from 'src/app/models/User';
 import { CommentService } from 'src/app/service/comment.service';
 import { ImageUploadService } from 'src/app/service/image-upload.service';
-import { NotificationService } from 'src/app/service/notification.service';
 import { PostService } from 'src/app/service/post.service';
-import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -27,26 +23,23 @@ export class ShowUserComponent implements OnInit {
   isUserPostsLoaded = false;
 
   constructor(
-    private tokenService: TokenStorageService,
     private postService: PostService,
-    private dialog: MatDialog,
-    private notificationService: NotificationService,
     private imgService: ImageUploadService,
     private userService: UserService,
     private commentService: CommentService,
-    private route : ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     let userId = this.route.snapshot.paramMap.get("id");
     console.log(userId);
-    
+
     this.userService.getUserById(userId!.toString())
       .subscribe(data => {
         this.user = data;
         this.isUserDataLoaded = true;
       });
 
-      this.postService.getAllPostsForUser()
+    this.postService.getAllPostsForOtherUser(userId!.toString())
       .subscribe(data => {
         console.log(data);
         this.posts = data;
@@ -96,5 +89,3 @@ export class ShowUserComponent implements OnInit {
   }
 
 }
-
- 

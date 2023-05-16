@@ -24,6 +24,10 @@ export class PostService {
     return this.http.get(POST_API + 'user/posts');
   }
 
+  getAllPostsForOtherUser(userId: string): Observable<any> {
+    return this.http.get(POST_API + userId + '/posts');
+  }
+
   likePost(postId: number, username: string): Observable<any> {
     return this.http.post(POST_API + postId + '/' + username + '/like', null);
   }

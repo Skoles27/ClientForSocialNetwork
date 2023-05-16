@@ -12,6 +12,7 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
 })
 export class SigninComponent implements OnInit {
 
+  hide = true;
   public signInForm!: FormGroup;
 
   constructor(
@@ -33,14 +34,14 @@ export class SigninComponent implements OnInit {
     return this.fb.group({
       username: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required])],
-    })
+    });
   }
 
   submit(): void {
     this.authService.signIn({
       username: this.signInForm.value.username,
       password: this.signInForm.value.password
-    }).subscribe(data => {
+    }).subscribe((data) => {
       console.log(data);
 
       this.tokenStorage.saveToken(data.token);
@@ -49,7 +50,7 @@ export class SigninComponent implements OnInit {
       this.notificationService.showSnackBar('Successfully signed in');
       this.router.navigate(['/']);
       window.location.reload();
-    }, error => {
+    }, (error) => {
       this.notificationService.showSnackBar(error.message);
       console.log(error);
     });

@@ -14,13 +14,15 @@
             <input type="file" style="display: none" #fileInput (change)="onFileSelected($event)">
 
             <button mat-raised-button color="accent" (click)="fileInput.click()">Upload File</button>
-            <button mat-button *ngIf="selectedFile" (click)="onUpload()">Upload</button>
+            <button mat-stroked-button color="primary" class="confirmBtn" *ngIf="selectedFile" (click)="onUpload()">Confirm</button>
         </div>
 
         <div class="col" style="text-align: left">
             <h2>{{user.username}}</h2>
-            <h3 style="font-style: italic">{{user.name}} {{user.lastname}}</h3>
-            <p>{{user.bio}}</p>
+            <h3>Name:
+                <!-- <mat-icon >account_circle</mat-icon> -->
+                {{user.name}} {{user.lastname}}</h3>
+            <p>Bio: {{user.bio}}</p>
         </div>
 
         <mat-divider style="margin: 2rem 0"></mat-divider>
