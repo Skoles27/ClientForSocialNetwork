@@ -32,6 +32,10 @@ export class PostService {
     return this.http.post(POST_API + postId + '/' + username + '/like', null);
   }
 
+  updatePost(postId: number, post: any): Observable<any> {
+    return this.http.post(POST_API + postId + '/update', post);
+  }
+
   deletePost(postId: number): Observable<any> {
     return this.http.post(POST_API + postId + '/delete', null);
   }

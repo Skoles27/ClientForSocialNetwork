@@ -6,7 +6,7 @@
             <div class="justify-content-center">
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput formControlName="email">
+                    <input matInput placeholder="user@example.com" formControlName="email">
                 </mat-form-field>
             </div>
 
@@ -30,23 +30,32 @@
                     <input matInput formControlName="lastname">
                 </mat-form-field>
             </div>
-        
+
             <div class="justify-content-center">
                 <mat-form-field appearance="outline">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" formControlName="password">
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                 </mat-form-field>
             </div>
 
             <div class="justify-content-center">
                 <mat-form-field appearance="outline">
                     <mat-label>Confirm password</mat-label>
-                    <input matInput type="password" formControlName="confirmPassword">
+                    <input matInput [type]="hideConf ? 'password' : 'text'" formControlName="confirmPassword">
+                    <button mat-icon-button matSuffix (click)="hideConf = !hideConf" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hideConf">
+                        <mat-icon>{{hideConf ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                 </mat-form-field>
             </div>
 
             <div id="controls" class="row">
-                <button style="width: 20%" [disabled]="signUpForm.invalid" (click)="submit()" mat-flat-button color="primary">Sign Up</button>
+                <button style="width: 20%" [disabled]="signUpForm.invalid" (click)="submit()" mat-flat-button
+                    color="primary">Sign Up</button>
             </div>
         </div>
     </form>

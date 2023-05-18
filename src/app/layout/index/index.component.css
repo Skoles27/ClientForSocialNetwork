@@ -3,12 +3,19 @@
   margin: 0 auto;
   width: 60%;
   padding-top: 3rem;
+  min-height: calc(100vh - 132px);
 }
 
 .post-card {
   display: block;
   margin: 2rem auto;
   width: 80%;
+}
+
+.search {
+  width: 80%;
+  display: block;
+  margin: 2rem auto;
 }
 
 .is-liked {
@@ -37,4 +44,8 @@
 
 .comment {
   margin: 5px 0 5px 16px;
+}
+
+.location {
+  margin: 10px 0 10px;
 }

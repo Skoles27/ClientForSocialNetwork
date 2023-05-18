@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Post } from 'src/app/models/Post';
 import { CommentService } from 'src/app/service/comment.service';
 import { ImageUploadService } from 'src/app/service/image-upload.service';
 import { NotificationService } from 'src/app/service/notification.service';
 import { PostService } from 'src/app/service/post.service';
+import { EditPostComponent } from '../edit-post/edit-post.component';
 
 @Component({
   selector: 'app-user-posts',
@@ -18,7 +20,8 @@ export class UserPostsComponent implements OnInit {
     private postService: PostService,
     private imgService: ImageUploadService,
     private commentService: CommentService,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.postService.getAllPostsForUser()
@@ -68,6 +71,17 @@ export class UserPostsComponent implements OnInit {
         post.comments?.splice(commentIndex, 1);
         this.notificationService.showSnackBar('Comment removed');
       });
+  }
+
+  openEditDialog(post: Post): void {
+    const dialogPostEditConfig = new MatDialogConfig();
+    dialogPostEditConfig.width = '800px';
+    dialogPostEditConfig.height = '760px';
+    dialogPostEditConfig.scrollStrategy?.disable;
+    dialogPostEditConfig.data = {
+      post: post
+    }
+    this.dialog.open(EditPostComponent, dialogPostEditConfig);
   }
 
   formatImage(img: any): any {

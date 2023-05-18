@@ -10,20 +10,20 @@ const TOKEN_HEADER_KEY = 'Authorization';
 })
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor(private tokenService: TokenStorageService) {}
+  constructor(private tokenService: TokenStorageService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let authRequest = req;
     const token = this.tokenService.getToken();
-    if(token != null) {
-      authRequest = req.clone({headers: req.headers.set(TOKEN_HEADER_KEY, token)});
+    if (token != null) {
+      authRequest = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, token) });
     }
     return next.handle(authRequest);
   }
 }
 
 export const authInterceptorProviders = [
-  {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
 ];
 
 // Trouble may be because of useClass or useValue!

@@ -1,0 +1,16 @@
+.content {
+    padding-top: 5px;
+}
+
+.post-image {
+    width: 250px;
+    height: 200px;
+}
+
+.uplodBtn {
+    margin: 20px 0 20px;
+}
+
+textarea {
+    min-height: 90px;
+}

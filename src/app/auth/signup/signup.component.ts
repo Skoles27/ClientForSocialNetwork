@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { NotificationService } from 'src/app/service/notification.service';
 
@@ -11,12 +12,14 @@ import { NotificationService } from 'src/app/service/notification.service';
 export class SignupComponent implements OnInit {
 
   public signUpForm!: FormGroup;
+  hide = true;
+  hideConf = true;
 
   constructor(
     private authService: AuthService,
     private notificationService: NotificationService,
-    private fb: FormBuilder
-    ) {}
+    private router: Router,
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.signUpForm = this.createSignUpForm();
@@ -46,6 +49,7 @@ export class SignupComponent implements OnInit {
     }).subscribe(data => {
       console.log(data);
       this.notificationService.showSnackBar('Successfully signed up');
+      this.router.navigate(['/']);
     }, error => {
       this.notificationService.showSnackBar('Something went wrong during sign up');
     })

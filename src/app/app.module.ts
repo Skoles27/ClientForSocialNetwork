@@ -19,6 +19,9 @@ import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { AddPostComponent } from './user/add-post/add-post.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShowUserComponent } from './user/show-user/show-user.component';
+import { SearchPostsPipe } from './pipes/search-posts.pipe';
+import { FooterComponent } from './layout/footer/footer.component';
+import { EditPostComponent } from './user/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { ShowUserComponent } from './user/show-user/show-user.component';
     EditUserComponent,
     AddPostComponent,
     ShowUserComponent,
+    SearchPostsPipe,
+    FooterComponent,
+    EditPostComponent,
   ],
   imports: [
     BrowserModule,

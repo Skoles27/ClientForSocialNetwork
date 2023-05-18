@@ -2,7 +2,8 @@
 
     <h1>Profile</h1>
     <div style="text-align: right">
-        <button mat-flat-button color="primary" (click)="openEditDialog()">Edit Info</button>
+        <button mat-flat-button color="primary" (click)="openEditDialog()"><mat-icon color="white">edit</mat-icon>Edit
+            Info</button>
     </div>
 
     <div style="padding-top: 2rem" class="row">
@@ -13,15 +14,17 @@
 
             <input type="file" style="display: none" #fileInput (change)="onFileSelected($event)">
 
-            <button mat-raised-button color="accent" (click)="fileInput.click()">Upload File</button>
-            <button mat-stroked-button color="primary" class="confirmBtn" *ngIf="selectedFile" (click)="onUpload()">Confirm</button>
+            <button mat-raised-button color="accent" (click)="fileInput.click()">
+                <mat-icon color="white">upload</mat-icon>Upload File</button>
+            <button mat-stroked-button color="primary" class="confirmBtn" *ngIf="selectedFile"
+                (click)="onUpload()">Confirm</button>
         </div>
 
         <div class="col" style="text-align: left">
             <h2>{{user.username}}</h2>
             <h3>Name:
-                <!-- <mat-icon >account_circle</mat-icon> -->
-                {{user.name}} {{user.lastname}}</h3>
+                {{user.name}} {{user.lastname}}
+            </h3>
             <p>Bio: {{user.bio}}</p>
         </div>
 

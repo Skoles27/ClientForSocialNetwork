@@ -24,7 +24,7 @@ export class AddPostComponent implements OnInit {
     private imgUploadService: ImageUploadService,
     private notificationService: NotificationService,
     private router: Router,
-    private fb: FormBuilder) {}
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.postForm = this.createPostForm();
@@ -50,11 +50,11 @@ export class AddPostComponent implements OnInit {
 
       if (this.createdPost.id != null) {
         this.imgUploadService.uploadImageForPost(this.createdPost.id, this.selectedFile)
-        .subscribe(() => {
-          this.notificationService.showSnackBar('Post created successfully');
-          this.isPostCreated = true;
-          this.router.navigate(['/profile']);
-        });
+          .subscribe(() => {
+            this.notificationService.showSnackBar('Post created successfully');
+            this.isPostCreated = true;
+            this.router.navigate(['/profile']);
+          });
       }
     });
   }

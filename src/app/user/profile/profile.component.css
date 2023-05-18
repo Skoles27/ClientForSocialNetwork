@@ -4,6 +4,7 @@
     width: 60%;
     text-align: center;
     padding-top: 3rem;
+    min-height: calc(100vh - 132px);
 }
 
 .profile-image {
@@ -16,6 +17,6 @@
     margin-bottom: 2rem;
 }
 
-.confirmBtn{
+.confirmBtn {
     margin: 0 0 0 10px;
 }

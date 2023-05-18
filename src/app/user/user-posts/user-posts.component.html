@@ -1,6 +1,7 @@
 <div *ngIf="isUserPostsLoaded">
   <div style="text-align: right">
-    <button mat-flat-button color="primary" routerLink="/profile/add">Add Post</button>
+    <button mat-flat-button color="primary" routerLink="/profile/add"><mat-icon color="white">add</mat-icon>Add
+      Post</button>
   </div>
 
   <h2>{{posts.length}} Posts</h2>
@@ -9,7 +10,7 @@
     <mat-card-header style="text-align: left">
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{post.title}}</mat-card-title>
-      <mat-card-subtitle>{{post.location}}</mat-card-subtitle>
+      <mat-card-subtitle class="location">{{post.location}}</mat-card-subtitle>
     </mat-card-header>
 
     <img mat-card-image [src]="formatImage(post.image)" alt="post image">
@@ -33,9 +34,12 @@
     </div>
 
     <mat-card-actions align="end">
-      <button color="warn" mat-button (click)="deletePost(post, i)">
-        <mat-icon color="warn">delete</mat-icon>
-        Remove Post
+      <button class="editBtn" mat-raised-button color="primary" (click)="openEditDialog(post)">
+        <mat-icon color="white">edit</mat-icon>Edit Post
+      </button>
+
+      <button mat-raised-button color="warn" (click)="deletePost(post, i)">
+        <mat-icon color="white">delete</mat-icon>Remove Post
       </button>
     </mat-card-actions>
 

@@ -1,5 +1,6 @@
-<div class="scroll">
-    <h2>Edit User Profile</h2>
+<h2 mat-dialog-title>Edit User Profile</h2>
+
+<mat-dialog-content align="center" class="content">
     <form [formGroup]="profileEditForm">
         <mat-form-field class="w-100 formField" appearance="outline">
             <mat-label>Name</mat-label>
@@ -13,10 +14,11 @@
             <mat-label>Biography</mat-label>
             <input matInput formControlName="bio">
         </mat-form-field>
-
-        <div class="row">
-            <button (click)="closeDialog()" mat-button color="warn" class="w-50" mat-dialog-close disableRipple>Cancel</button>
-            <button mat-flat-button color="primary" class="w-50" [disabled]="profileEditForm.invalid" (click)="submit()" disableRipple>Update</button>
-        </div>
     </form>
-</div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button (click)="closeDialog()" mat-raised-button color="warn" mat-dialog-close disableRipple>Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="profileEditForm.invalid" (click)="submit()"
+        disableRipple>Update</button>
+</mat-dialog-actions>

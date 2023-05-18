@@ -19,6 +19,7 @@ export class IndexComponent implements OnInit {
   posts!: Post[];
   isUserDataLoaded = false;
   user!: User;
+  searchStr = '';
 
   constructor(private postService: PostService,
     private userService: UserService,
@@ -93,6 +94,7 @@ export class IndexComponent implements OnInit {
     this.commentService.createComment(postId, message).subscribe(data => {
       console.log(data);
       post.comments?.push(data);
+      this.notificationService.showSnackBar('Comment published!');
     });
   }
 
@@ -102,8 +104,4 @@ export class IndexComponent implements OnInit {
     }
     return 'data:image/jpeg;base64,' + img;
   }
-
-  // showUser(userId : number){
-  //   this.router.navigate(['showUser', userId]);
-  // }
 }

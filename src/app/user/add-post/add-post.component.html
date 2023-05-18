@@ -1,40 +1,38 @@
 <div>
-    <div style="text-align: right">
-      <button mat-flat-button color="primary" routerLink="/profile">My Posts</button>
-    </div>
-  
-    <h2>Create Post</h2>
-    <form [formGroup]="postForm">
-  
-      <img class="post-image" [src]="previewImgURL || 'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg'" alt="user image">
-  
-      <input type="file"
-             style="display: none"
-             #fileInput
-             (change)="onFileSelected($event)">
-  
-      <button class="uplodBtn" mat-raised-button color="accent" (click)="fileInput.click()">Upload File</button>
-  
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Title</mat-label>
-        <input matInput
-               formControlName="title">
-      </mat-form-field>
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Caption</mat-label>
-        <textarea matInput formControlName="caption"></textarea>
-      </mat-form-field>
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Location</mat-label>
-        <input matInput
-               formControlName="location">
-      </mat-form-field>
-  
-      <div style="text-align: right">
-        <button mat-flat-button color="primary" [disabled]="postForm.invalid" (click)="submit()">
-          Create Post
-        </button>
-      </div>
-  
-    </form>
+  <div style="text-align: right">
+    <button mat-flat-button color="primary" routerLink="/profile">My Posts</button>
   </div>
+
+  <h2>Create Post</h2>
+  <form [formGroup]="postForm">
+
+    <img class="post-image"
+      [src]="previewImgURL || 'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg'"
+      alt="post image">
+
+    <input type="file" style="display: none" #fileInput (change)="onFileSelected($event)">
+
+    <button class="uplodBtn" mat-raised-button color="accent" (click)="fileInput.click()">
+      <mat-icon color="white">upload</mat-icon>Upload File</button>
+
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Caption</mat-label>
+      <textarea matInput formControlName="caption"></textarea>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location">
+    </mat-form-field>
+
+    <div class="createBtn" style="text-align: right">
+      <button mat-flat-button color="primary" [disabled]="postForm.invalid" (click)="submit()">
+        Create Post
+      </button>
+    </div>
+
+  </form>
+</div>

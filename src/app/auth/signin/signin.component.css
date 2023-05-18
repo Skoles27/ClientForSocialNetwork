@@ -1,6 +1,7 @@
 .signIn-page {
     text-align: center;
     margin-top: 10rem;
+    min-height: calc(100vh - 292px);
 }
 
 #controls {

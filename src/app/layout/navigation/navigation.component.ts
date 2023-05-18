@@ -15,17 +15,17 @@ export class NavigationComponent implements OnInit {
   isDataLoaded = false;
   user!: User;
 
-  constructor(private tokenService: TokenStorageService, private userService: UserService, private router: Router) {}
+  constructor(private tokenService: TokenStorageService, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.isSignedIn = !!this.tokenService.getToken();
 
-    if(this.isSignedIn) {
+    if (this.isSignedIn) {
       this.userService.getCurrentUser()
-      .subscribe(data => {
-        this.user = data;
-        this.isDataLoaded = true;
-      })
+        .subscribe(data => {
+          this.user = data;
+          this.isDataLoaded = true;
+        })
     }
   }
 
