@@ -22,6 +22,14 @@
     width: 80%;
 }
 
+.is-liked {
+    color: darkred;
+  }
+  
+  .not-liked {
+    color: grey;
+  }
+
 .content {
     font-size: 17px;
     text-align: left;
@@ -32,9 +40,9 @@
     margin: 0 0 7px 32px;
 }
 
-.subtitleDown {
-    padding: 0 0 7px 32px;
-}
+.btn {
+    margin: 15px 0 0 8px;
+  }
 
 .divider {
     margin: 10px 0 10px;
